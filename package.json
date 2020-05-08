@@ -1,0 +1,39 @@
+{
+  "name": "wiremock-loader",
+  "version": "1.0.0",
+  "description": "Take local request stubs and load them into an active wiremock instance",
+  "main": "index.js",
+  "repository": "https://gitlab.com/chotchkies/wiremock-loader",
+  "author": "cameron@semisafe.com",
+  "license": "Apache-2.0",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "plugin:jsx-a11y/recommended",
+      "prettier",
+      "prettier/react",
+      "airbnb",
+      "plugin:import/typescript"
+    ],
+    "plugins": [
+      "jsx-a11y",
+      "prettier"
+    ],
+    "rules": {
+      "react/jsx-filename-extension": [
+        1,
+        {
+          "extensions": [
+            ".js",
+            "ts",
+            ".jsx",
+            ".tsx"
+          ]
+        }
+      ]
+    }
+  }
+}
