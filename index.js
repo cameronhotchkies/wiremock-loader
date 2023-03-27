@@ -35,6 +35,15 @@ const addMapping = (mappingData) => {
   });
 
   const postBody = JSON.stringify(mappingData);
+
+  if (mappingData.scenarioName || mappingData.requiredScenarioState || mappingData.newScenarioState) {
+      postBody.persistent = true;
+      postBody.priority = 1;
+      postBody.scenarioName = mappingData.scenarioName || '';
+      postBody.requiredScenarioState = mappingData.requiredScenarioState || '';
+      postBody.newScenarioState = mappingData.newScenarioState || '';
+  }
+
   request.write(postBody);
   request.end();
 };
@@ -67,10 +76,14 @@ fs.readdir(`${argv.mocks}/mappings`, (err, files) => {
 
       let stub = JSON.parse(data);
 
-      if (stub.response.bodyFileName) {
-        inlineBodyFile(stub)
+      if (Array.isArray(stub.mappings)) {
+        stub.mappings.forEach(mapping => { addMapping(mapping); });
       } else {
-        addMapping(stub);
+        if (stub.response.bodyFileName) {
+          inlineBodyFile(stub);
+        } else {
+          addMapping(stub);
+        }
       }
     });
 
